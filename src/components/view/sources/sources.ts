@@ -1,20 +1,37 @@
+import { ISource } from '../../../types';
 import './sources.css';
 
 class Sources {
-  draw(data) {
+  draw(data: ISource[]): void {
     const fragment = document.createDocumentFragment();
-    const sourceItemTemp = document.querySelector('#sourceItemTemp');
+    const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement | null;
+
+    if (!sourceItemTemp) {
+      console.error('Template #sourceItemTemp not found');
+      return;
+    }
 
     data.forEach((item) => {
-      const sourceClone = sourceItemTemp.content.cloneNode(true);
+      const sourceClone = sourceItemTemp.content.cloneNode(true) as DocumentFragment;
+      const itemNameElem = sourceClone.querySelector('.source__item-name');
+      const sourceItemElem = sourceClone.querySelector('.source__item');
 
-      sourceClone.querySelector('.source__item-name').textContent = item.name;
-      sourceClone.querySelector('.source__item').setAttribute('data-source-id', item.id);
+      if (itemNameElem) {
+        itemNameElem.textContent = item.name;
+      }
+
+      if (sourceItemElem) {
+        sourceItemElem.setAttribute('data-source-id', item.id);
+      }
 
       fragment.append(sourceClone);
     });
 
-    document.querySelector('.sources').append(fragment);
+    const sourcesContainer = document.querySelector('.sources');
+
+    if (sourcesContainer) {
+      sourcesContainer.append(fragment);
+    }
   }
 }
 
