@@ -1,13 +1,35 @@
 .sources {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   width: 100%;
-  height: 120px;
-  overflow: auto;
   align-items: center;
   font:
     300 1em 'Fira Sans',
     sans-serif;
+  justify-content: center;
+  max-height: 136px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.sources::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sources::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+
+.sources::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.sources::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 .source__item {
