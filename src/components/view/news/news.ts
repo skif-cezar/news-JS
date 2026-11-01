@@ -5,11 +5,25 @@ class News {
   draw(data: INewsItem[]) {
     const news = data.length >= 10 ? data.filter((_item, idx) => idx < 10) : data;
 
+    const newsContainer = document.querySelector('.news');
+
     const fragment = document.createDocumentFragment();
     const newsItemTemp = document.querySelector('#newsItemTemp') as HTMLTemplateElement | null;
 
     if (!newsItemTemp) {
       console.error('Template #newsItemTemp not found');
+      return;
+    }
+
+    if (Array.isArray(news) && news.length === 0) {
+      if (newsContainer) {
+        newsContainer.innerHTML = '';
+
+        const span = document.createElement('span');
+        span.className = 'news-error';
+        span.textContent = 'News not found!';
+        newsContainer.appendChild(span);
+      }
       return;
     }
 
@@ -61,8 +75,6 @@ class News {
 
       fragment.append(newsClone);
     });
-
-    const newsContainer = document.querySelector('.news');
 
     if (newsContainer) {
       newsContainer.innerHTML = '';

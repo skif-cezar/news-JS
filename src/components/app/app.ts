@@ -12,7 +12,6 @@ class App {
   }
 
   start(): void {
-    // Безопасно вешаем слушатель кликов на блок источников
     const sourcesContainer = document.querySelector('.sources');
 
     if (sourcesContainer) {
@@ -23,7 +22,6 @@ class App {
       console.warn("Container '.sources' not found in the DOM");
     }
 
-    // Загружаем список источников при старте приложения
     this.controller.getSources((data) => this.view.drawSources(data));
   }
 }
