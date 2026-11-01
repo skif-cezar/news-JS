@@ -1,18 +1,4 @@
-interface LoaderOptions {
-  [key: string]: string;
-}
-
-enum Endpoint {
-  EVERYTHING = 'everything',
-  SOURCES = 'sources',
-}
-
-interface RequestParams {
-  endpoint: Endpoint;
-  options?: object;
-}
-
-type ResponseCallback<T = unknown> = (data: T) => void;
+import { LoaderOptions, RequestParams, ResponseCallback, Endpoint } from '../../types';
 
 class Loader {
   private baseLink: string;
