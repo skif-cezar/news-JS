@@ -11,7 +11,7 @@ const baseConfig = {
     rules: [
       {
         test: /\.ts$/,
-        loader: 'esbuild-loader',
+        loader: 'ts-loader',
         options: { target: 'es2022' },
         exclude: /node_modules/,
       },
