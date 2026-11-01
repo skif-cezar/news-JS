@@ -3,18 +3,18 @@
     "target": "es2022",
     "module": "commonjs",
     "lib": ["es2022", "dom"],
-    
+
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
-    
+
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    
+
     "outDir": "./dist",
     "rootDir": "./src"
   },
