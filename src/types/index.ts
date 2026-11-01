@@ -9,7 +9,7 @@ export enum Endpoint {
 
 export interface RequestParams {
   endpoint: Endpoint;
-  options?: object;
+  options?: Partial<LoaderOptions>;
 }
 
 export type ResponseCallback<T = unknown> = (data: T) => void;

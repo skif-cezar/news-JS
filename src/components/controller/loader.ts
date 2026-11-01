@@ -2,7 +2,7 @@ import { LoaderOptions, RequestParams, ResponseCallback, Endpoint } from '../../
 
 class Loader {
   private baseLink: string;
-  private options: LoaderOptions;
+  public options: Readonly<LoaderOptions>;
 
   constructor(baseLink: string, options: LoaderOptions) {
     this.baseLink = baseLink;
