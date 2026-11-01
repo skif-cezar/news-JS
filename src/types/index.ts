@@ -24,11 +24,6 @@ export interface ISource {
   country: string;
 }
 
-export interface ISourcesResponse {
-  status: string;
-  sources: ISource[];
-}
-
 export interface INewsItem {
   author: string | null;
   content: string;
@@ -41,4 +36,15 @@ export interface INewsItem {
     id: string | null;
     name: string;
   };
+}
+
+export interface INewsResponse {
+  articles?: INewsItem[];
+  [key: string]: unknown;
+}
+
+export interface ISourcesResponse {
+  status?: string;
+  sources?: ISource[];
+  [key: string]: unknown;
 }
