@@ -1,8 +1,12 @@
-const path = require('path');
-const { merge } = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const DotenvWebpackPlugin = require('dotenv-webpack');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { merge } from 'webpack-merge';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import DotenvWebpackPlugin from 'dotenv-webpack';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const baseConfig = {
   entry: path.resolve(__dirname, './src/index.ts'),
@@ -12,7 +16,6 @@ const baseConfig = {
       {
         test: /\.ts$/,
         loader: 'ts-loader',
-        options: { target: 'es2022' },
         exclude: /node_modules/,
       },
       {
@@ -38,11 +41,12 @@ const baseConfig = {
   ],
 };
 
-module.exports = ({ mode }) => {
+export default async ({ mode }) => {
   const isProductionMode = mode === 'prod';
+
   const envConfig = isProductionMode
-    ? require('./webpack.prod.config')
-    : require('./webpack.dev.config');
+    ? (await import('./webpack.prod.config.js')).default
+    : (await import('./webpack.dev.config.js')).default;
 
   return merge(baseConfig, envConfig);
 };
