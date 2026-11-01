@@ -28,3 +28,17 @@ export interface ISourcesResponse {
   status: string;
   sources: ISource[];
 }
+
+export interface INewsItem {
+  author: string | null;
+  content: string;
+  title: string;
+  description: string;
+  url: string;
+  urlToImage: string | null;
+  publishedAt: string;
+  source: {
+    id: string | null;
+    name: string;
+  };
+}
