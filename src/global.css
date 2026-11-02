@@ -34,18 +34,18 @@ footer {
 }
 
 .footer-author a {
-  color: #333;
+  color: rgb(156 163 175);
   text-decoration: none;
 }
 
 footer .copyright {
   font-size: 14px;
-  color: #333;
+  color: rgb(156 163 175);
   text-align: center;
 }
 footer .copyright a {
-  color: #444;
+  color: rgb(156 163 175);
 }
-footer .copyright a:hover {
-  color: #555;
+footer .footer-author a:hover {
+  color: rgb(37 99 235);
 }
