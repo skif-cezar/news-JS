@@ -22,7 +22,37 @@ class App {
       console.warn("Container '.sources' not found in the DOM");
     }
 
-    this.controller.getSources((data) => this.view.drawSources(data));
+    this.controller.getSources((data) => {
+      this.view.drawSources(data);
+
+      this.initSourcesScroll();
+    });
+  }
+
+  private initSourcesScroll(): void {
+    const scrollContainer = document.querySelector('.sources.buttons') as HTMLElement | null;
+    const btnLeft = document.getElementById('scroll-left') as HTMLButtonElement | null;
+    const btnRight = document.getElementById('scroll-right') as HTMLButtonElement | null;
+
+    if (!scrollContainer || !btnLeft || !btnRight) {
+      return;
+    }
+
+    const scrollAmount: number = 300;
+
+    btnLeft.addEventListener('click', (): void => {
+      scrollContainer.scrollBy({
+        left: -scrollAmount,
+        behavior: 'smooth',
+      });
+    });
+
+    btnRight.addEventListener('click', (): void => {
+      scrollContainer.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth',
+      });
+    });
   }
 }
 
