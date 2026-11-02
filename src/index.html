@@ -10,7 +10,25 @@
     <div class="layout-wrapper">
       <header>
         <h1>News Portal</h1>
-        <div class="sources buttons"></div>
+        <nav class="sources-menu">
+          <button
+            id="scroll-left"
+            class="menu-button arrow-left"
+            type="button"
+            aria-label="Scroll Left"
+          >
+            <span class="visually-hidden">Scroll Left</span>
+          </button>
+          <div class="sources buttons"></div>
+          <button
+            id="scroll-right"
+            class="menu-button arrow-right"
+            type="button"
+            aria-label="Scroll right"
+          >
+            <span class="visually-hidden">Scroll right</span>
+          </button>
+        </nav>
       </header>
       <main>
         <div class="news"></div>
