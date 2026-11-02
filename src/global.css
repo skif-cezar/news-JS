@@ -34,6 +34,10 @@ header h1 {
   color: #ffffff;
 }
 
+main {
+  padding: 0 24px;
+}
+
 footer {
   height: 100px;
   display: flex;
@@ -68,4 +72,20 @@ footer .copyright a {
 }
 footer .footer-author a:hover {
   color: rgb(37 99 235);
+}
+
+@media (max-width: 576px) {
+  .footer-content {
+    flex-direction: column;
+  }
+
+  header h1 {
+    display: block;
+    margin: 12px auto;
+    text-align: center;
+  }
+
+  main {
+    padding: 0 12px;
+  }
 }
