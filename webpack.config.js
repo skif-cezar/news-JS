@@ -1,40 +1,52 @@
-const path = require('path');
-const { merge } = require('webpack-merge');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const DotenvWebpackPlugin = require('dotenv-webpack');
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { merge } from 'webpack-merge';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import DotenvWebpackPlugin from 'dotenv-webpack';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const baseConfig = {
-    entry: path.resolve(__dirname, './src/index.js'),
-    mode: 'development',
-    module: {
-        rules: [
-            {
-                test: /\.css$/i,
-                use: ['style-loader', 'css-loader'],
-            },
-        ],
-    },
-    resolve: {
-        extensions: ['.js'],
-    },
-    output: {
-        filename: 'index.js',
-        path: path.resolve(__dirname, './dist'),
-    },
-    plugins: [
-        new DotenvWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/index.html'),
-            filename: 'index.html',
-        }),
-        new CleanWebpackPlugin(),
+  entry: path.resolve(__dirname, './src/index.ts'),
+  mode: 'development',
+  module: {
+    rules: [
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
+  output: {
+    filename: 'index.js',
+    path: path.resolve(__dirname, './dist'),
+  },
+  plugins: [
+    new DotenvWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/index.html'),
+      filename: 'index.html',
+    }),
+    new CleanWebpackPlugin(),
+  ],
 };
 
-module.exports = ({ mode }) => {
-    const isProductionMode = mode === 'prod';
-    const envConfig = isProductionMode ? require('./webpack.prod.config') : require('./webpack.dev.config');
+export default async ({ mode }) => {
+  const isProductionMode = mode === 'prod';
 
-    return merge(baseConfig, envConfig);
+  const envConfig = isProductionMode
+    ? (await import('./webpack.prod.config.js')).default
+    : (await import('./webpack.dev.config.js')).default;
+
+  return merge(baseConfig, envConfig);
 };
